@@ -138,7 +138,8 @@ export default class SwitchSelector extends Component {
       valuePadding,
       height,
       bold,
-      disabled
+      disabled,
+      onPressDisabled
     } = this.props;
 
     const options = this.props.options.map((element, index) => (
@@ -147,9 +148,14 @@ export default class SwitchSelector extends Component {
         style={{ flex: 1, flexDirection: "column", justifyContent: "center" }}
       >
         <TouchableOpacity
-          disabled={disabled}
           style={styles.button}
-          onPress={() => this.toggleItem(index)}
+          onPress={() => {
+            if (disabled && onPressDisabled) {
+              onPressDisabled()
+            } else if (!disabled) {
+              this.toggleItem(index)
+            }
+          }}
         >
           {typeof element.customIcon === "function"
             ? element.customIcon(this.state.selected == index)

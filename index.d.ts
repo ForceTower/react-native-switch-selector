@@ -32,6 +32,7 @@ declare module "react-native-switch-selector" {
     style?: ViewStyle;
     returnObject?: boolean;
     disabled?: boolean;
+    onPressDisabled(): void
   }
 
   class SwitchSelector extends Component<ISwitchSelectorProps> {}
